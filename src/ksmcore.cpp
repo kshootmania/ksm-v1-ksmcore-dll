@@ -2,7 +2,7 @@
 
 #include <string>
 #include <cstdint>
-#include "ksmcore/line_graph.hpp"
+#include "chart_object/line_graph.hpp"
 
 LineGraph *CreateLineGraph()
 {
