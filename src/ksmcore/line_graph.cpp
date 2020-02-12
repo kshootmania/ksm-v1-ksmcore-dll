@@ -1,5 +1,5 @@
 // From KSM v2: https://github.com/m4saka/kshootmania-v2
-#include "line_graph.hpp"
+#include "ksmcore/line_graph.hpp"
 #include <ios>
 #include <sstream>
 
