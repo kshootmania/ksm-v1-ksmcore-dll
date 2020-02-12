@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.5.1)
+project(ksmcore)
+set(CMAKE_CXX_STANDARD 17)
+include_directories(include)
+file(GLOB_RECURSE sources src/*.cpp)
+add_library(ksmcore SHARED ${sources})
