@@ -67,8 +67,8 @@ double LineGraph::valueAt(Measure measure) const
     else
     {
         const double secondValue = (*secondItr).second.first;
-        const double firstMeasure = (*firstItr).first;
-        const double secondMeasure = (*secondItr).first;
+        const Measure firstMeasure = (*firstItr).first;
+        const Measure secondMeasure = (*secondItr).first;
         return firstValue + (secondValue - firstValue) * (measure - firstMeasure) / (secondMeasure - firstMeasure);
     }
 }
