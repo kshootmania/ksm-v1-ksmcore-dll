@@ -4,7 +4,9 @@ A library used in K-Shoot MANIA v1.xx.
 ## Compilation (with Visual Studio)
 ```
 git clone https://github.com/m4saka/ksmcore-dll.git
+cd ksmcore-dll
 git submodule update -i --recursive
+
 mkdir build
 cd build
 cmake -A Win32 ..
