@@ -17,7 +17,7 @@ enum CamParam
 
 class GameSystem;
 
-DLL_EXPORT bool CreateGameSystem(const char *chartFilename, GameSystem **pRet);
+DLL_EXPORT bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet);
 
 DLL_EXPORT void DestroyGameSystem(GameSystem *pGameSystem);
 
