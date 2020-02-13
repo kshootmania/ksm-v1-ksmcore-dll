@@ -21,7 +21,7 @@ DLL_EXPORT bool CreateGameSystem(const char *chartFilename, double initialMs, Ga
 
 DLL_EXPORT void DestroyGameSystem(GameSystem *pGameSystem);
 
-DLL_EXPORT void UpdateGameSystem(GameSystem *pGameSystem, int currentMs);
+DLL_EXPORT void UpdateGameSystem(GameSystem *pGameSystem, double currentMs);
 
 DLL_EXPORT void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet);
 
