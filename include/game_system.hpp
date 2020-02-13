@@ -16,6 +16,7 @@ private:
     double m_currentZoomBottom;
     double m_currentZoomSide;
     double m_currentCenterSplit;
+    double m_currentManualTilt;
 
 public:
     GameSystem(std::string_view chartFilename, Ms initialMs);
@@ -28,4 +29,5 @@ public:
     double currentZoomBottom() const;
     double currentZoomSide() const;
     double currentCenterSplit() const;
+    double currentManualTilt() const;
 };

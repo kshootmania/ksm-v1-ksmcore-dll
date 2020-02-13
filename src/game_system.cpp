@@ -4,8 +4,6 @@
 constexpr Ms ZOOM_RELAXATION_TIME_LEGACY = 40.0; // ver <  1.67
 constexpr Ms ZOOM_RELAXATION_TIME = 1.0;         // ver >= 1.67
 
-constexpr Ms CENTER_SPLIT_RELAXATION_TIME = 1.0;
-
 namespace
 {
     void updateWithRelaxationTime(double & value, double target, Ms relaxationTime, Ms deltaMs)
@@ -27,6 +25,7 @@ GameSystem::GameSystem(std::string_view chartFilename, Ms initialMs)
     , m_currentZoomBottom(m_chart.zoomBottom().valueAt(m_prevMeasure))
     , m_currentZoomSide(m_chart.zoomSide().valueAt(m_prevMeasure))
     , m_currentCenterSplit(m_chart.centerSplit().valueAt(m_prevMeasure))
+    , m_currentManualTilt(m_chart.manualTilt().valueAt(m_prevMeasure))
 {
 }
 
@@ -44,8 +43,10 @@ void GameSystem::update(Ms currentMs)
     updateWithRelaxationTime(m_currentZoomSide, targetZoomSide, m_zoomRelaxationTime, deltaMs);
 
     // Update center_split values
-    const double targetCenterSplit = m_chart.centerSplit().valueAt(currentMeasure);
-    updateWithRelaxationTime(m_currentCenterSplit, targetCenterSplit, m_zoomRelaxationTime, deltaMs);
+    m_currentCenterSplit = m_chart.centerSplit().valueAt(currentMeasure);
+
+    // Update manual tilt values
+    m_currentManualTilt = m_chart.manualTilt().valueAt(currentMeasure);
 
     // Store current time and measure as previous ones
     m_prevMs = currentMs;

@@ -12,6 +12,7 @@ enum CamParam
     CAM_ZOOM_BOTTOM,
     CAM_ZOOM_SIDE,
     CAM_CENTER_SPLIT,
+    CAM_MANUAL_TILT,
 };
 
 class GameSystem;

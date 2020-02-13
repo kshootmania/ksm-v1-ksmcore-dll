@@ -13,6 +13,7 @@ bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **
     }
     catch (...)
     {
+        delete *pRet;
         return false;
     }
 }
@@ -45,6 +46,10 @@ void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet
 
     case CAM_CENTER_SPLIT:
         *pRet = pGameSystem->currentCenterSplit();
+        break;
+
+    case CAM_MANUAL_TILT:
+        *pRet = pGameSystem->currentManualTilt();
         break;
     }
 }
