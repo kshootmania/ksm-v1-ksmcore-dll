@@ -72,3 +72,8 @@ double GameSystem::currentCenterSplit() const
 {
     return m_currentCenterSplit;
 }
+
+double GameSystem::currentManualTilt() const
+{
+    return m_currentManualTilt;
+}
