@@ -6,16 +6,22 @@
 #define DLL_EXPORT extern "C" __attribute__((visibility ("default")))
 #endif
 
-class LineGraph;
+enum CamParam
+{
+    CAM_ZOOM_TOP = 0,
+    CAM_ZOOM_BOTTOM,
+    CAM_ZOOM_SIDE,
+    CAM_CENTER_SPLIT,
+};
 
-DLL_EXPORT LineGraph *CreateLineGraph();
+class GameSystem;
 
-DLL_EXPORT void DestroyLineGraph(LineGraph *pLineGraph);
+DLL_EXPORT bool CreateGameSystem(const char *chartFilename, GameSystem **pRet);
 
-DLL_EXPORT void InsertPointToLineGraph(LineGraph *pLineGraph, int measure, double v);
+DLL_EXPORT void DestroyGameSystem(GameSystem *pGameSystem);
 
-DLL_EXPORT void LineGraphValueAt(const LineGraph *pLineGraph, int measure, double *pRet);
+DLL_EXPORT void UpdateGameSystem(GameSystem *pGameSystem, int currentMs);
 
-DLL_EXPORT bool LineGraphContains(const LineGraph *pLineGraph, int measure);
+DLL_EXPORT void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet);
 
 #undef DLL_EXPORT

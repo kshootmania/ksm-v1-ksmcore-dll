@@ -2,29 +2,49 @@
 
 #include <string>
 #include <cstdint>
-#include "chart_object/line_graph.hpp"
+#include "game_system.hpp"
 
-LineGraph *CreateLineGraph()
+bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet)
 {
-    return new LineGraph;
+    try
+    {
+        *pRet = new GameSystem(chartFilename, initialMs);
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
 
-void DestroyLineGraph(LineGraph *pLineGraph)
+void DestroyGameSystem(GameSystem *pGameSystem)
 {
-    delete pLineGraph;
+    delete pGameSystem;
 }
 
-void InsertPointToLineGraph(LineGraph *pLineGraph, int measure, double v)
+void UpdateGameSystem(GameSystem *pGameSystem, double currentMs)
 {
-    pLineGraph->insert(static_cast<std::int64_t>(measure), v);
+    pGameSystem->update(currentMs);
 }
 
-void LineGraphValueAt(const LineGraph *pLineGraph, int measure, double *pRet)
+void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet)
 {
-    *pRet = pLineGraph->valueAt(static_cast<std::int64_t>(measure));
-}
+    switch (camParam)
+    {
+    case CAM_ZOOM_TOP:
+        *pRet = pGameSystem->currentZoomTop();
+        break;
 
-bool LineGraphContains(const LineGraph *pLineGraph, int measure)
-{
-    return static_cast<bool>(pLineGraph->count(measure));
+    case CAM_ZOOM_BOTTOM:
+        *pRet = pGameSystem->currentZoomBottom();
+        break;
+
+    case CAM_ZOOM_SIDE:
+        *pRet = pGameSystem->currentZoomSide();
+        break;
+
+    case CAM_CENTER_SPLIT:
+        *pRet = pGameSystem->currentCenterSplit();
+        break;
+    }
 }
