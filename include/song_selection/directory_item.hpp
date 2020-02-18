@@ -10,10 +10,10 @@ namespace SongSelection
     {
     private:
         const std::string m_title;
-        const std::string m_path;
+        const fs::path m_path;
 
     public:
-        DirectoryItem(const std::string & title, const std::string & path)
+        DirectoryItem(const std::string & title, const fs::path & path)
             : m_title(title)
             , m_path(path)
         {
