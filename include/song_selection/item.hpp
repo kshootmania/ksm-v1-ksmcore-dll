@@ -1,7 +1,9 @@
 #pragma once
+#include <filesystem>
 
 namespace SongSelection
 {
+    namespace fs = std::filesystem;
 
     class AbstractItem
     {

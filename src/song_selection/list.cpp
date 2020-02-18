@@ -13,7 +13,7 @@ namespace SongSelection
                 if (entry.is_directory())
                 {
                     m_items.push_back(
-                        std::make_unique<DirectoryItem>(entry.path.filename().u8string(), p) // TODO: Consider foldername.csv
+                        std::make_unique<DirectoryItem>(entry.path().filename().u8string(), entry.path()) // TODO: Consider foldername.csv
                     );
                 }
             }
@@ -32,7 +32,7 @@ namespace SongSelection
                         {
                             // TODO: Insert sub-directory
                         }
-                        else if (e.extension() == ".ksh") // TODO: Consider upper case
+                        else if (e.path().extension() == ".ksh") // TODO: Consider upper case
                         {
                             // TODO: Insert SongItem
                         }
