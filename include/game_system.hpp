@@ -1,6 +1,6 @@
 #pragma once
 #include <string_view>
-#include "beat_map/beat_map.hpp"
+#include "ksh/beat_map/beat_map.hpp"
 #include "ksh/playable_chart.hpp"
 
 class GameSystem
