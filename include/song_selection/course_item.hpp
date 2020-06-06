@@ -20,6 +20,11 @@ namespace SongSelection
         }
 
         virtual ~CourseItem() = default;
+        
+        virtual std::string getDebugString() const
+        {
+            return std::string("(course) ") + m_title;
+        }
     };
 
 }

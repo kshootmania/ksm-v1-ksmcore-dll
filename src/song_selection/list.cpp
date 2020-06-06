@@ -41,5 +41,15 @@ namespace SongSelection
             }
         }
     }
+    
+    std::string List::getDebugString() const
+    {
+        std::string ret;
+        for (const auto & item : m_items)
+        {
+            ret += item->getDebugString() + "¥n";
+        }
+        return ret;
+    }
 
 }

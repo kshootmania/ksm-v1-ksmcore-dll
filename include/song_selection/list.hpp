@@ -16,6 +16,8 @@ namespace SongSelection
         explicit List(const fs::path & path, bool isRoot);
 
         ~List() = default;
+        
+        std::string getDebugString() const;
     };
 
 }

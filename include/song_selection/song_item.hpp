@@ -17,6 +17,23 @@ namespace SongSelection
     public:
         SongItem() = default;
         virtual ~SongItem() = default;
+
+        virtual std::string getDebugString() const
+        {
+            std::string ret = "(song) ";
+            for (const auto & chart : m_charts)
+            {
+                if (chart.has_value() && chart->metaData.count("title") > 0 && chart->metaData.count("level") > 0)
+                {
+                    ret += std::string("[") + chart->metaData.at("title") + " Lv" + chart->metaData.at("level") + "] ";
+                }
+                else
+                {
+                    ret = "[none] ";
+                }
+            }
+            return ret;
+        }
     };
 
 }
