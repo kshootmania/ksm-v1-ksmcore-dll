@@ -13,7 +13,7 @@ namespace SongSelection
         std::vector<std::unique_ptr<AbstractItem>> m_items; // TODO: Make this const
 
     public:
-        explicit List(const fs::path & path, bool isRoot);
+        List(const fs::path & path, bool isRoot);
 
         ~List() = default;
         
