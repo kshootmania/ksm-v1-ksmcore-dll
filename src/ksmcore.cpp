@@ -30,26 +30,27 @@ void UpdateGameSystem(GameSystem *pGameSystem, double currentMs)
 
 void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet)
 {
+    const auto & camera = pGameSystem->camera();
     switch (camParam)
     {
     case CAM_ZOOM_TOP:
-        *pRet = pGameSystem->currentZoomTop();
+        *pRet = camera.currentZoomTop();
         break;
 
     case CAM_ZOOM_BOTTOM:
-        *pRet = pGameSystem->currentZoomBottom();
+        *pRet = camera.currentZoomBottom();
         break;
 
     case CAM_ZOOM_SIDE:
-        *pRet = pGameSystem->currentZoomSide();
+        *pRet = camera.currentZoomSide();
         break;
 
     case CAM_CENTER_SPLIT:
-        *pRet = pGameSystem->currentCenterSplit();
+        *pRet = camera.currentCenterSplit();
         break;
 
     case CAM_MANUAL_TILT:
-        *pRet = pGameSystem->currentManualTilt();
+        *pRet = camera.currentManualTilt();
         break;
     }
 }
