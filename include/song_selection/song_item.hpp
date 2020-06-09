@@ -52,17 +52,19 @@ namespace SongSelection
 
         virtual std::string getDebugString() const
         {
+            bool chartExists = false;
             std::string ret = "(song) ";
             for (const auto & chart : m_charts)
             {
                 if (chart && chart->metaData.count("title") > 0 && chart->metaData.count("level") > 0)
                 {
                     ret += std::string("[") + chart->metaData.at("title") + " Lv" + chart->metaData.at("level") + "] ";
+                    chartExists = true;
                 }
-                else
-                {
-                    ret = "[none] ";
-                }
+            }
+            if (!chartExists)
+            {
+                ret = "[none] ";
             }
             return ret;
         }
