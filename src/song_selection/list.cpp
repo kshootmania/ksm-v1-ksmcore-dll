@@ -1,4 +1,6 @@
 #include "song_selection/list.hpp"
+#include "song_selection/song_item.hpp"
+#include "song_selection/heading_item.hpp"
 
 namespace SongSelection
 {
@@ -23,18 +25,37 @@ namespace SongSelection
             // Package directory ("song/xxx/")
             for (const auto & entry : fs::directory_iterator(path))
             {
+                bool subDirectoryHeadingAdded = false;
                 if (entry.is_directory())
                 {
-                    // Song directory
-                    for (const auto & e : fs::directory_iterator(path))
+                    auto songItem = std::make_unique<SongItem>(entry.path().u8string());
+                    if (!songItem->empty())
                     {
-                        if (e.is_directory())
+                        // Chart(s) found
+                        m_items.push_back(std::move(songItem));
+                    }
+                    else
+                    {
+                        // Chart not found
+                        for (const auto & e : fs::directory_iterator(path))
                         {
-                            // TODO: Insert sub-directory
-                        }
-                        else if (e.path().extension() == ".ksh") // TODO: Consider upper case
-                        {
-                            // TODO: Insert SongItem
+                            if (e.is_directory())
+                            {
+                                // If the directory has only folders, recognize it as a sub-folder
+                                if (!subDirectoryHeadingAdded)
+                                {
+                                    m_items.push_back(
+                                        std::make_unique<HeadingItem>(entry.path().parent_path().filename().u8string()) // TODO: Consider foldername.csv
+                                    );
+                                    subDirectoryHeadingAdded = true;
+                                }
+
+                                auto subSongItem = std::make_unique<SongItem>(e.path().u8string());
+                                if (!subSongItem->empty())
+                                {
+                                    m_items.push_back(std::move(subSongItem));
+                                }
+                            }
                         }
                     }
                 }
