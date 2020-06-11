@@ -20,7 +20,17 @@ namespace SongSelection
         }
 
         virtual ~DirectoryItem() = default;
-        
+
+        std::string title() const
+        {
+            return m_title;
+        }
+
+        fs::path path() const
+        {
+            return m_path;
+        }
+
         virtual std::string getDebugString() const
         {
             return std::string("(directory) ") + m_title;

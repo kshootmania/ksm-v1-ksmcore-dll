@@ -18,6 +18,11 @@ namespace SongSelection
 
         virtual ~HeadingItem() = default;
         
+        std::string title() const
+        {
+            return m_title;
+        }
+        
         virtual std::string getDebugString() const
         {
             return std::string("(heading) ") + m_title;
