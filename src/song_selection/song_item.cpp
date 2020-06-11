@@ -5,14 +5,14 @@ namespace SongSelection
 
     namespace
     {
-        std::array<std::unique_ptr<ksh::Chart>, SongItem::DIFFICULTY_COUNT> loadCharts(const fs::path & path)
+        std::array<std::unique_ptr<const ksh::Chart>, SongItem::DIFFICULTY_COUNT> loadCharts(const fs::path & path)
         {
-            std::array<std::unique_ptr<ksh::Chart>, SongItem::DIFFICULTY_COUNT> charts;
+            std::array<std::unique_ptr<const ksh::Chart>, SongItem::DIFFICULTY_COUNT> charts;
             for (const auto & e : fs::directory_iterator(path))
             {
                 if (e.path().extension() == ".ksh") // TODO: Consider upper case in Windows
                 {
-                    auto chart = std::make_unique<ksh::Chart>(e.path().u8string());
+                    auto chart = std::make_unique<const ksh::Chart>(e.path().u8string());
                     charts[chart->difficultyIdx()] = std::move(chart);
                 }
             }

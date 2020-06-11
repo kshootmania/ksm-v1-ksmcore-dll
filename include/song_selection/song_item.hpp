@@ -14,7 +14,7 @@ namespace SongSelection
         static constexpr std::size_t DIFFICULTY_COUNT = 4;
 
     private:
-        const std::array<std::unique_ptr<ksh::Chart>, DIFFICULTY_COUNT> m_charts;
+        const std::array<std::unique_ptr<const ksh::Chart>, DIFFICULTY_COUNT> m_charts;
 
     public:
         explicit SongItem(const fs::path & path);
