@@ -22,6 +22,7 @@ enum CamParam
 };
 
 class GameSystem;
+class KeySound;
 
 DLL_EXPORT int GetVersion();
 
@@ -32,5 +33,11 @@ DLL_EXPORT void DestroyGameSystem(GameSystem *pGameSystem);
 DLL_EXPORT void UpdateGameSystem(GameSystem *pGameSystem, double currentMs);
 
 DLL_EXPORT void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet);
+
+DLL_EXPORT bool CreateKeySound(const char *filename, int max, KeySound **pRet);
+
+DLL_EXPORT void DestroyKeySound(KeySound *pKeySound);
+
+DLL_EXPORT void PlayKeySound(KeySound *pKeySound);
 
 #undef DLL_EXPORT

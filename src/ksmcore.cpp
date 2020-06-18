@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdint>
 #include "game_system.hpp"
+#include "key_sound.hpp"
 
 bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet)
 {
@@ -58,4 +59,28 @@ void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet
         *pRet = camera.currentManualTilt();
         break;
     }
+}
+
+bool CreateKeySound(const char *filename, int max, KeySound **pRet)
+{
+    try
+    {
+        *pRet = new KeySound(filename, static_cast<DWORD>(max));
+        return true;
+    }
+    catch (...)
+    {
+        delete *pRet;
+        return false;
+    }
+}
+
+void PlayKeySound(KeySound *pKeySound)
+{
+    pKeySound->play();
+}
+
+void DestroyKeySound(KeySound *pKeySound)
+{
+    delete pKeySound;
 }
