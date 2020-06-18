@@ -9,4 +9,5 @@ target_compile_features(ksmcore PUBLIC cxx_std_17)
 target_include_directories(ksmcore PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/ksh)
+add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/bass)
 target_link_libraries(ksmcore ksh)
