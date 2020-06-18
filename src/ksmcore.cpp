@@ -18,6 +18,11 @@ bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **
     }
 }
 
+int GetVersion()
+{
+    return KSMCORE_VERSION;
+}
+
 void DestroyGameSystem(GameSystem *pGameSystem)
 {
     delete pGameSystem;
