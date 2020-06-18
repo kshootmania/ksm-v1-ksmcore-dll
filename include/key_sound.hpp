@@ -15,7 +15,7 @@ public:
     KeySound(const std::string & filename, DWORD max); // Note: max must be between 1 and 65535
     ~KeySound();
 
-    void play();
+    void play(double volume = 1.0);
 
     void stop();
 };

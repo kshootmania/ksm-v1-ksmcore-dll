@@ -38,6 +38,6 @@ DLL_EXPORT bool CreateKeySound(const char *filename, int max, KeySound **pRet);
 
 DLL_EXPORT void DestroyKeySound(KeySound *pKeySound);
 
-DLL_EXPORT void PlayKeySound(KeySound *pKeySound);
+DLL_EXPORT void PlayKeySound(KeySound *pKeySound, double volume);
 
 #undef DLL_EXPORT
