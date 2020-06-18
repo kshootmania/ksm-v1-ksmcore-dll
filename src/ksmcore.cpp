@@ -19,7 +19,7 @@ bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **
     }
 }
 
-int GetVersion()
+int KSMCore_GetVersion()
 {
     return KSMCORE_VERSION;
 }

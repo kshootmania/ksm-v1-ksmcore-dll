@@ -24,7 +24,7 @@ enum CamParam
 class GameSystem;
 class KeySound;
 
-DLL_EXPORT int GetVersion();
+DLL_EXPORT int KSMCore_GetVersion();
 
 DLL_EXPORT bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet);
 
