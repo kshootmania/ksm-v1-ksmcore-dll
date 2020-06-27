@@ -75,12 +75,12 @@ bool CreateKeySound(const char *filename, int max, KeySound **pRet)
     }
 }
 
-void PlayKeySound(KeySound *pKeySound, double volume)
-{
-    pKeySound->play(volume);
-}
-
 void DestroyKeySound(KeySound *pKeySound)
 {
     delete pKeySound;
+}
+
+void PlayKeySound(KeySound *pKeySound, double volume)
+{
+    pKeySound->play(volume);
 }
