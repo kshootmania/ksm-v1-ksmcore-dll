@@ -4,7 +4,11 @@ project(ksmcore CXX)
 file(GLOB_RECURSE sources
     ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_library(ksmcore SHARED ${sources})
-target_compile_options(ksmcore PUBLIC -O2 -Wall -fPIC)
+if(MSVC)
+    target_compile_options(ksmcore PUBLIC -O2 /W4)
+else()
+    target_compile_options(ksmcore PUBLIC -O2 -Wall -fPIC)
+endif()
 target_compile_features(ksmcore PUBLIC cxx_std_17)
 target_include_directories(ksmcore PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
