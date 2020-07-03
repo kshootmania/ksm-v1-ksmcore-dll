@@ -26,7 +26,7 @@ class KeySound;
 
 DLL_EXPORT int KSMCore_GetVersion();
 
-DLL_EXPORT bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet);
+DLL_EXPORT int CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet);
 
 DLL_EXPORT void DestroyGameSystem(GameSystem *pGameSystem);
 
@@ -34,7 +34,7 @@ DLL_EXPORT void UpdateGameSystem(GameSystem *pGameSystem, double currentMs);
 
 DLL_EXPORT void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet);
 
-DLL_EXPORT bool CreateKeySound(const char *filename, int max, KeySound **pRet);
+DLL_EXPORT int CreateKeySound(const char *filename, int max, KeySound **pRet);
 
 DLL_EXPORT void DestroyKeySound(KeySound *pKeySound);
 
