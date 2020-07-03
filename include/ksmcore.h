@@ -40,4 +40,6 @@ DLL_EXPORT void DestroyKeySound(KeySound *pKeySound);
 
 DLL_EXPORT void PlayKeySound(KeySound *pKeySound, double volume);
 
+DLL_EXPORT int StartsWith(const char *pStr, const char *pHead);
+
 #undef DLL_EXPORT

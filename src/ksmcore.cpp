@@ -1,6 +1,7 @@
 #include "ksmcore.h"
 
 #include <string>
+#include <cstring>
 #include <cstdint>
 #include "game_system.hpp"
 #include "key_sound.hpp"
@@ -83,4 +84,10 @@ void DestroyKeySound(KeySound *pKeySound)
 void PlayKeySound(KeySound *pKeySound, double volume)
 {
     pKeySound->play(volume);
+}
+
+int StartsWith(const char *pStr, const char *pHead)
+{
+    const auto headLength = std::strlen(pHead);
+    return std::strlen(pStr) >= headLength && std::strncmp(pStr, pHead, headLength) == 0;
 }
