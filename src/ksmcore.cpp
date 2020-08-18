@@ -6,21 +6,28 @@
 #endif
 
 #include <string>
+#include <cstring>
 #include <cstdint>
 #include "game_system.hpp"
+#include "key_sound.hpp"
 
-bool CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet)
+int CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet)
 {
     try
     {
         *pRet = new GameSystem(chartFilename, initialMs);
-        return true;
+        return 1;
     }
     catch (...)
     {
         delete *pRet;
-        return false;
+        return 0;
     }
+}
+
+int KSMCore_GetVersion()
+{
+    return KSMCORE_VERSION;
 }
 
 void DestroyGameSystem(GameSystem *pGameSystem)
@@ -58,4 +65,34 @@ void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet
         *pRet = camera.currentManualTilt();
         break;
     }
+}
+
+int CreateKeySound(const char *filename, int max, KeySound **pRet)
+{
+    try
+    {
+        *pRet = new KeySound(filename, static_cast<DWORD>(max));
+        return 1;
+    }
+    catch (...)
+    {
+        delete *pRet;
+        return 0;
+    }
+}
+
+void DestroyKeySound(KeySound *pKeySound)
+{
+    delete pKeySound;
+}
+
+void PlayKeySound(KeySound *pKeySound, double volume)
+{
+    pKeySound->play(volume);
+}
+
+int StartsWith(const char *pStr, const char *pHead)
+{
+    const auto headLength = std::strlen(pHead);
+    return std::strlen(pStr) >= headLength && std::strncmp(pStr, pHead, headLength) == 0;
 }
