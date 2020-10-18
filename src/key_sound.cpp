@@ -35,7 +35,7 @@ namespace ksmcore
     {
         // Not simply using BASS_SampleGetChannel and BASS_ChannelPlay
         // in order to give higher priority to later plays
-        BASS_ChannelStop(volume);
+        BASS_ChannelStop(m_hChannels[m_hChannelCursor]);
         BASS_ChannelSetAttribute(m_hChannels[m_hChannelCursor], BASS_ATTRIB_VOL, static_cast<float>(volume));
         BASS_ChannelPlay(m_hChannels[m_hChannelCursor], TRUE);
         if (++m_hChannelCursor >= static_cast<DWORD>(m_hChannels.size()))
