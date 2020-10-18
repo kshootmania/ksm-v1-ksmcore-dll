@@ -1,17 +1,22 @@
 #include "game_system.hpp"
 
-GameSystem::GameSystem(std::string_view chartFilename, Ms initialMs)
-    : m_chart(chartFilename)
-    , m_camera(&m_chart, initialMs)
+namespace ksmcore
 {
-}
 
-void GameSystem::update(Ms currentMs)
-{
-    m_camera.update(currentMs);
-}
+    GameSystem::GameSystem(std::string_view chartFilename, Ms initialMs)
+        : m_chart(chartFilename)
+        , m_camera(&m_chart, initialMs)
+    {
+    }
 
-const Camera & GameSystem::camera() const
-{
-    return m_camera;
+    void GameSystem::update(Ms currentMs)
+    {
+        m_camera.update(currentMs);
+    }
+
+    const Camera & GameSystem::camera() const
+    {
+        return m_camera;
+    }
+
 }

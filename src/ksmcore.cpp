@@ -1,3 +1,4 @@
+// ksmcore.cpp: DLL interface for K-Shoot Mania v1.xx
 #include "ksmcore.h"
 
 #include <string>
@@ -5,6 +6,8 @@
 #include <cstdint>
 #include "game_system.hpp"
 #include "key_sound.hpp"
+
+using namespace ksmcore;
 
 int CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet)
 {

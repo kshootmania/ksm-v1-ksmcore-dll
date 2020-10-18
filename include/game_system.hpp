@@ -4,17 +4,22 @@
 #include "ksh/playable_chart.hpp"
 #include "camera.hpp"
 
-class GameSystem
+namespace ksmcore
 {
-private:
-    const ksh::PlayableChart m_chart;
-    Camera m_camera;
 
-public:
-    GameSystem(std::string_view chartFilename, Ms initialMs);
-    ~GameSystem() = default;
+    class GameSystem
+    {
+    private:
+        const ksh::PlayableChart m_chart;
+        Camera m_camera;
 
-    void update(Ms currentMs);
+    public:
+        GameSystem(std::string_view chartFilename, Ms initialMs);
+        ~GameSystem() = default;
 
-    const Camera & camera() const;
-};
+        void update(Ms currentMs);
+
+        const Camera & camera() const;
+    };
+
+}
