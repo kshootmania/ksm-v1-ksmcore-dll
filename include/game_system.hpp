@@ -11,6 +11,7 @@ namespace ksmcore
     {
     private:
         const ksh::PlayableChart m_chart;
+        BGMPlayer m_bgmPlayer;
         Camera m_camera;
 
     public:
