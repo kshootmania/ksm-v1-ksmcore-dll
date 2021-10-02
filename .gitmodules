@@ -1,3 +1,6 @@
 [submodule "third_party/ksh"]
 	path = third_party/ksh
 	url = https://github.com/m4saka/ksh.git
+[submodule "third_party/hidapi"]
+	path = third_party/hidapi
+	url = https://github.com/libusb/hidapi.git
