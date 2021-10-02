@@ -2,20 +2,21 @@
 #include <string_view>
 #include "ksh/beat_map/beat_map.hpp"
 #include "ksh/playable_chart.hpp"
+#include "iscene.hpp"
 #include "camera.hpp"
 
 namespace ksmcore
 {
 
-    class GameSystem
+    class PlayScene : public IScene
     {
     private:
         const ksh::PlayableChart m_chart;
         Camera m_camera;
 
     public:
-        GameSystem(std::string_view chartFilename, Ms initialMs);
-        ~GameSystem() = default;
+        PlayScene(std::string_view chartFilename, Ms initialMs);
+        ~PlayScene() = default;
 
         void update(Ms currentMs);
 

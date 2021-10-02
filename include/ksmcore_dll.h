@@ -19,7 +19,7 @@ enum CamParam
 namespace ksmcore
 {
     class KSMCore;
-    class GameSystem;
+    class PlayScene;
     class KeySound;
 }
 
@@ -33,13 +33,13 @@ DLL_EXPORT void KSMCore_Update(ksmcore::KSMCore *pKSMCore, double uptimeMs);
 
 // TODO: Add "KSMCore_" prefix to every function name
 
-DLL_EXPORT int CreateGameSystem(const char *chartFilename, double initialMs, ksmcore::GameSystem **pRet);
+DLL_EXPORT int CreatePlayScene(const char *chartFilename, double initialMs, ksmcore::PlayScene **pRet);
 
-DLL_EXPORT void DestroyGameSystem(ksmcore::GameSystem *pGameSystem);
+DLL_EXPORT void DestroyPlayScene(ksmcore::PlayScene *pPlayScene);
 
-DLL_EXPORT void UpdateGameSystem(ksmcore::GameSystem *pGameSystem, double currentMs);
+DLL_EXPORT void UpdatePlayScene(ksmcore::PlayScene *pPlayScene, double currentMs);
 
-DLL_EXPORT void GetCurrentCamValue(ksmcore::GameSystem *pGameSystem, CamParam camParam, double *pRet);
+DLL_EXPORT void GetCurrentCamValue(ksmcore::PlayScene *pPlayScene, CamParam camParam, double *pRet);
 
 DLL_EXPORT int CreateKeySound(const char *filename, int max, ksmcore::KeySound **pRet);
 

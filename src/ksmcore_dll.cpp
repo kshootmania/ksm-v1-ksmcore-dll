@@ -5,7 +5,7 @@
 #include <cstring>
 #include <cstdint>
 #include "ksm_core.hpp"
-#include "game_system.hpp"
+#include "play_scene.hpp"
 #include "key_sound.hpp"
 
 using namespace ksmcore;
@@ -55,13 +55,13 @@ void KSMCore_Update(ksmcore::KSMCore *pKSMCore, double uptimeMs)
     pKSMCore->update(uptimeMs);
 }
 
-int CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet)
+int CreatePlayScene(const char *chartFilename, double initialMs, PlayScene **pRet)
 {
     pRet = nullptr;
 
     try
     {
-        *pRet = new GameSystem(chartFilename, initialMs);
+        *pRet = new PlayScene(chartFilename, initialMs);
         return 1;
     }
     catch (...)
@@ -71,24 +71,24 @@ int CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **p
     }
 }
 
-void DestroyGameSystem(GameSystem *pGameSystem)
+void DestroyPlayScene(PlayScene *pPlayScene)
 {
-    delete pGameSystem;
+    delete pPlayScene;
 }
 
-void UpdateGameSystem(GameSystem *pGameSystem, double currentMs)
+void UpdatePlayScene(PlayScene *pPlayScene, double currentMs)
 {
-    if (pGameSystem == nullptr)
+    if (pPlayScene == nullptr)
     {
         return;
     }
 
-    pGameSystem->update(currentMs);
+    pPlayScene->update(currentMs);
 }
 
-void GetCurrentCamValue(GameSystem *pGameSystem, CamParam camParam, double *pRet)
+void GetCurrentCamValue(PlayScene *pPlayScene, CamParam camParam, double *pRet)
 {
-    const auto & camera = pGameSystem->camera();
+    const auto & camera = pPlayScene->camera();
     switch (camParam)
     {
     case CAM_ZOOM_TOP:

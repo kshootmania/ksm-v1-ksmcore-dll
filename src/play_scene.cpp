@@ -1,20 +1,20 @@
-#include "game_system.hpp"
+#include "play_scene.hpp"
 
 namespace ksmcore
 {
 
-    GameSystem::GameSystem(std::string_view chartFilename, Ms initialMs)
+    PlayScene::PlayScene(std::string_view chartFilename, Ms initialMs)
         : m_chart(chartFilename)
         , m_camera(&m_chart, initialMs)
     {
     }
 
-    void GameSystem::update(Ms currentMs)
+    void PlayScene::update(Ms currentMs)
     {
         m_camera.update(currentMs);
     }
 
-    const Camera & GameSystem::camera() const
+    const Camera & PlayScene::camera() const
     {
         return m_camera;
     }
