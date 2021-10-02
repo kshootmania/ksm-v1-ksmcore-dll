@@ -1,4 +1,4 @@
-// ksmcore.h: DLL interface for K-Shoot Mania v1.xx
+// ksmcore_dll.h: DLL interface for K-Shoot Mania v1.xx
 #pragma once
 
 #ifdef _WIN32
@@ -6,12 +6,6 @@
 #else
 #define DLL_EXPORT extern "C" __attribute__((visibility ("default")))
 #endif
-
-// Version of ksmcore-dll
-//   Examples:
-//     v1.70  => 1700
-//     v1.70b => 1702
-static constexpr int KSMCORE_VERSION = 1702;
 
 enum CamParam
 {
@@ -24,11 +18,18 @@ enum CamParam
 
 namespace ksmcore
 {
+    class KSMCore;
     class GameSystem;
     class KeySound;
 }
 
 DLL_EXPORT int KSMCore_GetVersion();
+
+DLL_EXPORT int KSMCore_Init(ksmcore::KSMCore **pRet);
+
+DLL_EXPORT void KSMCore_Terminate(ksmcore::KSMCore *pKSMCore);
+
+DLL_EXPORT void KSMCore_Update(ksmcore::KSMCore *pKSMCore, double uptimeMs);
 
 // TODO: Add "KSMCore_" prefix to every function name
 

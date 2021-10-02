@@ -1,16 +1,64 @@
 // ksmcore.cpp: DLL interface for K-Shoot Mania v1.xx
-#include "ksmcore.h"
+#include "ksmcore_dll.h"
 
 #include <string>
 #include <cstring>
 #include <cstdint>
+#include "ksm_core.hpp"
 #include "game_system.hpp"
 #include "key_sound.hpp"
 
 using namespace ksmcore;
 
+namespace
+{
+    // Version of ksmcore-dll
+    //   Examples:
+    //     v1.70  => 1700
+    //     v1.70b => 1702
+    constexpr int kKSMCoreVersion = 1702;
+}
+
+int KSMCore_GetVersion()
+{
+    return kKSMCoreVersion;
+}
+
+int KSMCore_Init(ksmcore::KSMCore **pRet)
+{
+    pRet = nullptr;
+
+    try
+    {
+        *pRet = new KSMCore;
+        return 1;
+    }
+    catch (...)
+    {
+        delete *pRet;
+        return 0;
+    }
+}
+
+void KSMCore_Terminate(ksmcore::KSMCore *pKSMCore)
+{
+    delete pKSMCore;
+}
+
+void KSMCore_Update(ksmcore::KSMCore *pKSMCore, double uptimeMs)
+{
+    if (pKSMCore == nullptr)
+    {
+        return;
+    }
+
+    pKSMCore->update(uptimeMs);
+}
+
 int CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **pRet)
 {
+    pRet = nullptr;
+
     try
     {
         *pRet = new GameSystem(chartFilename, initialMs);
@@ -23,11 +71,6 @@ int CreateGameSystem(const char *chartFilename, double initialMs, GameSystem **p
     }
 }
 
-int KSMCore_GetVersion()
-{
-    return KSMCORE_VERSION;
-}
-
 void DestroyGameSystem(GameSystem *pGameSystem)
 {
     delete pGameSystem;
@@ -35,6 +78,11 @@ void DestroyGameSystem(GameSystem *pGameSystem)
 
 void UpdateGameSystem(GameSystem *pGameSystem, double currentMs)
 {
+    if (pGameSystem == nullptr)
+    {
+        return;
+    }
+
     pGameSystem->update(currentMs);
 }
 
@@ -86,6 +134,11 @@ void DestroyKeySound(KeySound *pKeySound)
 
 void PlayKeySound(KeySound *pKeySound, double volume)
 {
+    if (pKeySound == nullptr)
+    {
+        return;
+    }
+
     pKeySound->play(volume);
 }
 
