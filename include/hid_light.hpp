@@ -1,21 +1,20 @@
 #pragma once
 #include <memory>
+#include <hidapi.h>
 #include "ksh/beat_map/beat_map.hpp"
 #include "ksh/playable_chart.hpp"
 
-struct hid_device;
-
 namespace ksmcore
 {
+    struct HidLightState;
 
     // Note: This class does not call hid_init() and hid_exit(), so call them yourself.
     class HidLight
     {
     private:
-        struct State;
-        std::unique_ptr<State> m_state;
+        std::unique_ptr<HidLightState> m_state;
 
-        const hid_device *m_pDevice;
+        hid_device * const m_pDevice;
 
     public:
         struct Color
