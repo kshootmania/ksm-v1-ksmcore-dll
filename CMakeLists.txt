@@ -20,4 +20,7 @@ target_include_directories(ksmcore PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/ksh)
 add_subdirectory(${PROJECT_SOURCE_DIR}/third_party/bass)
-target_link_libraries(ksmcore ksh bass)
+find_library(HIDAPI_LIBRARY NAMES hidapi)
+add_subdirectory(${hidapi_SOURCE_DIR})
+target_include_directories(ksmcore PUBLIC ${hidapi_INCLUDE_DIR})
+target_link_libraries(ksmcore ksh bass hidapi)
