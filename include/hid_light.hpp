@@ -8,7 +8,7 @@ namespace ksmcore
 {
     struct HidLightState;
 
-    // Note: This class does not call hid_init() and hid_exit(), so call them yourself.
+    // Note: This class calls hid_init() in ctor and hid_exit() in dtor, so do not create multiple instances of this class.
     class HidLight
     {
     private:
@@ -25,7 +25,7 @@ namespace ksmcore
         };
 
         HidLight();
-        ~HidLight() = default;
+        ~HidLight();
 
         // Set the color of all top lights
         void setTopLightColor(const Color & color);

@@ -30,7 +30,9 @@ namespace ksmcore
 
         hid_device *OpenDevice()
         {
-            hid_device_info *pInfo = hid_enumerate(3727, 4376);
+            hid_init();
+
+            hid_device_info *pInfo = hid_enumerate(3727, 4376); // FAUCETWO
             while (pInfo)
             {
                 if (pInfo->usage_page == 1 && pInfo->usage == 0)
@@ -62,6 +64,15 @@ namespace ksmcore
         : m_state(std::make_unique<HidLightState>())
         , m_pDevice(OpenDevice())
     {
+    }
+
+    HidLight::~HidLight()
+    {
+        if (m_pDevice != nullptr)
+        {
+            hid_close(m_pDevice);
+        }
+        hid_exit();
     }
 
     void HidLight::setTopLightColor(const HidLight::Color & color)
