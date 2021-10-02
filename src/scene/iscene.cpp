@@ -1,4 +1,4 @@
-#include "iscene.hpp"
+#include "scene/iscene.hpp"
 
 namespace ksmcore
 {

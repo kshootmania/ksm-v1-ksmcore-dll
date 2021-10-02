@@ -1,4 +1,4 @@
-#include "play_scene.hpp"
+#include "scene/play_scene.hpp"
 
 namespace ksmcore
 {

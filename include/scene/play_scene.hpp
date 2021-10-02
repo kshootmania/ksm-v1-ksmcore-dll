@@ -2,8 +2,8 @@
 #include <string_view>
 #include "ksh/beat_map/beat_map.hpp"
 #include "ksh/playable_chart.hpp"
-#include "iscene.hpp"
-#include "camera.hpp"
+#include "scene/iscene.hpp"
+#include "scene/play_scene/camera.hpp"
 
 namespace ksmcore
 {
