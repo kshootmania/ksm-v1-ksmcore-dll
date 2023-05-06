@@ -9,11 +9,26 @@ namespace ksmcore
         constexpr int ZOOM_RELAXATION_CHANGED_KSH_VERSION = 167;
         constexpr Ms ZOOM_RELAXATION_TIME_LEGACY = 40.0; // ver <  1.67
         constexpr Ms ZOOM_RELAXATION_TIME = 1.0;         // ver >= 1.67
+        constexpr int MANUAL_TILT_SCALE_CHANGED_KSH_VERSION = 170;
+        constexpr double LARGE_MANUAL_TILT_THRESHOLD = 10.0;
+        constexpr double TO_LEGACY_MANUAL_TILT_SCALE = 14.0 / 10.0;
 
         void updateWithRelaxationTime(double & value, double target, Ms relaxationTime, Ms deltaMs)
         {
             const double targetRate = std::min(deltaMs / relaxationTime, 1.0);
             value = value * (1.0 - targetRate) + target * targetRate;
+        }
+
+        bool largeManualTiltExists(const LineGraph& manualTilt)
+        {
+            for (const auto & [measure, plot] : manualTilt)
+            {
+                if (std::abs(plot.first) >= LARGE_MANUAL_TILT_THRESHOLD || std::abs(plot.second) >= LARGE_MANUAL_TILT_THRESHOLD)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -23,6 +38,7 @@ namespace ksmcore
             pChart->isKshVersionNewerThanOrEqualTo(ZOOM_RELAXATION_CHANGED_KSH_VERSION)
                 ? ZOOM_RELAXATION_TIME
                 : ZOOM_RELAXATION_TIME_LEGACY)
+        , m_useLegacyScaleForManualTilt(!m_pChart->isKshVersionNewerThanOrEqualTo(MANUAL_TILT_SCALE_CHANGED_KSH_VERSION) && largeManualTiltExists(m_pChart->manualTilt()))
         , m_prevMs(initialMs)
         , m_prevMeasure(m_pChart->beatMap().msToMeasure(initialMs))
         , m_currentZoomTop(m_pChart->zoomTop().valueAt(m_prevMeasure))
@@ -51,6 +67,11 @@ namespace ksmcore
 
         // Update manual tilt values
         m_currentManualTilt = m_pChart->manualTilt().valueAt(currentMeasure);
+        if (m_useLegacyScaleForManualTilt)
+        {
+            // HACK: Legacy charts with large manual tilt values often depend on the tilt scale (14 degrees) used before v1.70
+            m_currentManualTilt *= TO_LEGACY_MANUAL_TILT_SCALE;
+        }
 
         // Store current time and measure as previous ones
         m_prevMs = currentMs;

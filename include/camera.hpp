@@ -10,6 +10,7 @@ namespace ksmcore
     private:
         const ksh::PlayableChart * const m_pChart;
         const Ms m_zoomRelaxationTime;
+        const bool m_useLegacyScaleForManualTilt;
         Ms m_prevMs;
         Measure m_prevMeasure;
 
