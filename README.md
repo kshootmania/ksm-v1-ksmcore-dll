@@ -9,8 +9,6 @@ cd ksmcore-dll
 
 ## Compilation (requires CMake and Visual Studio)
 ```
-mkdir build
-cd build
-cmake -A Win32 ..
-cmake --build . --config Release
+cmake -B build -A Win32
+cmake --build build --config Release
 ```
