@@ -11,8 +11,6 @@ namespace ksmcore
     {
     private:
         const HSAMPLE m_hSample;
-        const std::vector<HCHANNEL> m_hChannels;
-        DWORD m_hChannelCursor;
 
     public:
         KeySound(const std::string & filename, DWORD max); // Note: max must be between 1 and 65535

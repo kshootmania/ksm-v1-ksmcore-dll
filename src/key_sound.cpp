@@ -2,27 +2,8 @@
 
 namespace ksmcore
 {
-
-    namespace
-    {
-        std::vector<HCHANNEL> loadChannels(HSAMPLE hSample, DWORD max)
-        {
-            std::vector<HCHANNEL> hChannels;
-            hChannels.reserve(max);
-
-            for (DWORD i = 0; i < max; ++i)
-            {
-                hChannels.push_back(BASS_SampleGetChannel(hSample, TRUE));
-            }
-
-            return hChannels;
-        }
-    }
-
     KeySound::KeySound(const std::string & filename, DWORD max)
-        : m_hSample(BASS_SampleLoad(false, filename.c_str(), 0, 0, max, 0))
-        , m_hChannels(loadChannels(m_hSample, max))
-        , m_hChannelCursor(0)
+        : m_hSample(BASS_SampleLoad(false, filename.c_str(), 0, 0, max, BASS_SAMPLE_OVER_POS))
     {
     }
 
@@ -33,15 +14,9 @@ namespace ksmcore
 
     void KeySound::play(double volume)
     {
-        // Not simply using BASS_SampleGetChannel and BASS_ChannelPlay
-        // in order to give higher priority to later plays
-        BASS_ChannelStop(m_hChannels[m_hChannelCursor]);
-        BASS_ChannelSetAttribute(m_hChannels[m_hChannelCursor], BASS_ATTRIB_VOL, static_cast<float>(volume));
-        BASS_ChannelPlay(m_hChannels[m_hChannelCursor], TRUE);
-        if (++m_hChannelCursor >= static_cast<DWORD>(m_hChannels.size()))
-        {
-            m_hChannelCursor = 0;
-        }
+        const auto hChannel = BASS_SampleGetChannel(m_hSample, 0);
+        BASS_ChannelSetAttribute(hChannel, BASS_ATTRIB_VOL, static_cast<float>(volume));
+        BASS_ChannelPlay(hChannel, TRUE);
     }
 
     void KeySound::stop()
