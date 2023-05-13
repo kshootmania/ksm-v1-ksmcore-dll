@@ -11,7 +11,7 @@
 //   Examples:
 //     v1.70  => 1700
 //     v1.70b => 1702
-static constexpr int KSMCORE_VERSION = 1731;
+static constexpr int KSMCORE_VERSION = 1740;
 
 enum CamParam
 {
